@@ -164,8 +164,8 @@ def _create_or_update_bucket(connection, module, location):
 
     # Versioning
     versioning_status = bucket.get_versioning_status()
-    if versioning_status:
-        if versioning is not None:
+    if versioning is not None:
+        if versioning_status:
             if versioning and versioning_status['Versioning'] != "Enabled":
                 try:
                     bucket.configure_versioning(versioning)
