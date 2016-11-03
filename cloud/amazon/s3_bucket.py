@@ -173,7 +173,7 @@ def _create_or_update_bucket(connection, module, location):
                     versioning_status = bucket.get_versioning_status()
                 except S3ResponseError as e:
                     module.fail_json(msg=e.message)
-            elif not versioning and versioning_status['Versioning'] != "Enabled":
+            elif not versioning and versioning_status['Versioning'] == "Enabled":
                 try:
                     bucket.configure_versioning(versioning)
                     changed = True
