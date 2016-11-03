@@ -168,6 +168,12 @@ def _create_or_update_bucket(connection, module, location):
 
     # Versioning
     versioning_status = bucket.get_versioning_status()
+
+    # versioning_status dictionary is empty upon bucket creation
+    # so default the Versioning attribute to "Disabled"
+    if versioning_status == dict():
+        versioning_status = dict(Versioning="Disabled")
+
     if versioning_status:
         if versioning is not None:
             if versioning and versioning_status['Versioning'] != "Enabled":
